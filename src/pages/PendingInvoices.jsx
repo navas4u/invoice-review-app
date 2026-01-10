@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getPending, updateInvoice, approveInvoice } from "../api";
+import Loader from "../components/Loader";
 
 const PendingInvoices = () => {
   const [invoices, setInvoices] = useState([]);
   const [selected, setSelected] = useState(null);
   const [notice, setNotice] = useState(null);
+
+  const [loading, setLoading] = useState(true);      // page load
+  const [saving, setSaving] = useState(false);       // save / approve
 
   useEffect(() => {
     loadInvoices();
@@ -12,10 +16,13 @@ const PendingInvoices = () => {
 
   const loadInvoices = async () => {
     try {
+      setLoading(true);
       const data = await getPending();
       setInvoices(data);
     } catch (err) {
       setNotice({ type: "error", message: "❌ Failed to load invoices" });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,6 +36,7 @@ const PendingInvoices = () => {
 
   const handleSave = async () => {
     try {
+      setSaving(true);
       const res = await updateInvoice(selected);
       if (res.success) {
         setNotice({ type: "success", message: "Invoice updated successfully ✅" });
@@ -37,11 +45,14 @@ const PendingInvoices = () => {
       }
     } catch {
       setNotice({ type: "error", message: "❌ Failed to save invoice" });
+    } finally {
+      setSaving(false);
     }
   };
 
   const handleApprove = async () => {
     try {
+      setSaving(true);
       const res = await approveInvoice(selected.row);
       if (res.success) {
         setNotice({ type: "success", message: "Invoice approved successfully ✅" });
@@ -50,8 +61,15 @@ const PendingInvoices = () => {
       }
     } catch {
       setNotice({ type: "error", message: "❌ Failed to approve invoice" });
+    } finally {
+      setSaving(false);
     }
   };
+
+  /* ---------- LOADING STATE ---------- */
+  if (loading) {
+    return <Loader message="Loading pending invoices..." />;
+  }
 
   return (
     <div className="p-4 space-y-6">
@@ -95,7 +113,9 @@ const PendingInvoices = () => {
                     key={i}
                     onClick={() => handleSelect(inv)}
                     className={`cursor-pointer transition
-                      ${isSelected ? "bg-blue-100 border-l-4 border-blue-600" : "hover:bg-gray-100"}
+                      ${isSelected
+                        ? "bg-blue-100 border-l-4 border-blue-600"
+                        : "hover:bg-gray-100"}
                     `}
                   >
                     <td className="px-4 py-3">{inv.Date}</td>
@@ -146,17 +166,23 @@ const PendingInvoices = () => {
 
             <div className="flex gap-2">
               <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
+                className={`px-4 py-2 rounded text-white
+                  ${saving ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600"}
+                `}
                 onClick={handleSave}
+                disabled={saving}
               >
-                Save
+                {saving ? "Saving..." : "Save"}
               </button>
 
               <button
-                className="bg-green-600 text-white px-4 py-2 rounded"
+                className={`px-4 py-2 rounded text-white
+                  ${saving ? "bg-gray-400 cursor-not-allowed" : "bg-green-600"}
+                `}
                 onClick={handleApprove}
+                disabled={saving}
               >
-                Approve
+                {saving ? "Approving..." : "Approve"}
               </button>
             </div>
           </div>
