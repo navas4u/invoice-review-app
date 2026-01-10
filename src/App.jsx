@@ -1,6 +1,7 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import PendingInvoices from "./pages/PendingInvoices";
 import ApprovedInvoices from "./pages/ApprovedInvoices";
+import logo from "./assets/ezinvy-logo.svg";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       {/* Header */}
       <header className="bg-white border-b shadow-sm px-6 py-4 flex items-center">
       <img
-          src="/ezinvy-logo.svg"
+          src={logo}
           alt="Ezinvy"
           className="h-10"
         />
