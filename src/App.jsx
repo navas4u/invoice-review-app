@@ -7,14 +7,13 @@ function App() {
     <div className="App min-h-screen bg-gray-50">
 
       {/* Header */}
-      <header className="bg-white border-b shadow-sm px-6 py-4">
-        <h1 className="text-2xl font-semibold text-gray-800">
-          Ezinvy
-          <span className="text-sm text-gray-500 ml-2">
-            Invoice Review
-          </span>
-        </h1>
-      </header>
+      <header className="bg-white border-b shadow-sm px-6 py-4 flex items-center">
+      <img
+          src="/ezinvy-logo.svg"
+          alt="Ezinvy"
+          className="h-10"
+        />
+      </header> 
 
       {/* Navigation Tabs */}
       <nav className="px-6 bg-white border-b">
