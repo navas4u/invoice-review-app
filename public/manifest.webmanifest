@@ -1,0 +1,23 @@
+{
+  "name": "Ezinvy Invoice Review",
+  "short_name": "Ezinvy",
+  "description": "Invoice review and approval system",
+  "start_url": "/invoice-review-app/",
+  "scope": "/invoice-review-app/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/ezinvy-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ezinvy-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+    
+  ]
+}

@@ -2,13 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="./ezinvy-icon.svg" />
-    <link rel="apple-touch-icon" href="./ezinvy-icon.svg" />
+    <link rel="apple-touch-icon" href="./ezinvy-icon-192.png" />
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>invoice-review-app</title>
+
+    <title>Ezinvy Invoice Review</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- IMPORTANT: relative path -->
+    <script type="module" src="./src/main.jsx"></script>
   </body>
 </html>

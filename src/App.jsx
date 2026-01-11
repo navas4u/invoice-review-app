@@ -12,7 +12,7 @@ function App() {
       <img
           src={logo}
           alt="Ezinvy"
-          className="h-10"
+          className="h-8"
         />
       </header> 
 
